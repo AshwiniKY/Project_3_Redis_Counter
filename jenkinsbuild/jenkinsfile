@@ -17,7 +17,7 @@ pipeline {
 
         stage("AppCode Checkout"){
             steps {
-                git branch:'redis-app', url:'https://github.com/prateekkumawat/kubernetes-12-ay.git'
+                git branch:'redis-app', url:'https://github.com/AshwiniKY/Project_3_Redis_Counter.git'
             }
         }
         
@@ -41,20 +41,20 @@ pipeline {
 
         stage("CreateImage"){
             steps{
-                 sh 'docker build -t prateekkumawat/webapp:1.1.1 . '          
+                 sh 'docker build -t AshwiniKY/webapp:1.1.1 . '          
             }
         }
         
         stage("Image scan"){
             steps{
-              sh 'trivy image prateekkumawat/webapp:1.1.1 >> scanreport.txt '
+              sh 'trivy image AshwiniKY/webapp:1.1.1 >> scanreport.txt '
             }
         }
 
         stage("push Image"){
           steps {
                sh 'docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW '
-               sh ' docker push prateekkumawat/webapp:1.1.1 '
+               sh ' docker push AshwiniKY/webapp:1.1.1 '
             }
         }
          
@@ -82,7 +82,7 @@ pipeline {
                                 { "name": "🟢 **Status**", "value": "**SUCCESS ✅**" },
                                 { "name": "🔢 **Build**", "value": "**#${env.BUILD_NUMBER}**" },
                                 { "name": "🌿 **Branch / Tag**", "value": "**${env.GIT_BRANCH ?: params.GIT_REF}**" },
-                                { "name": "🟢 **image**", "value": "**prateekkumawat/pythonapp:v0.0.1" },
+                                { "name": "🟢 **image**", "value": "**AshwiniKY/pythonapp:v0.0.1" },
                                 { "name": "🔗 **Build URL**", "value": "[**Open Build**](${env.BUILD_URL})" }
                             ],
                             "text": "🚀 **Build completed successfully!**"
